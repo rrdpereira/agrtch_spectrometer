@@ -5,6 +5,14 @@ import matplotlib.pyplot as plt
 from collections import namedtuple
 import ocean_optics_configs as config
 
+import os
+os.system("which python")
+import sys
+print(sys.version)
+from platform import python_version
+print(python_version())
+
+
 # definition of global named tuples in use
 Profile = namedtuple('Profile', 'usb_device, device_id, model_name, packet_size, cmd_ep_out, data_ep_in, '
                                 'data_ep_in_size, spectra_ep_in, spectra_ep_in_size')
