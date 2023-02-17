@@ -4,14 +4,16 @@ import struct
 import matplotlib.pyplot as plt
 from collections import namedtuple
 import ocean_optics_configs as config
+import numpy as np
 
-import os
+import sys, time, os, datetime
 os.system("which python")
-import sys
 print(sys.version)
 from platform import python_version
 print(python_version())
 
+Dots1Inch_height=96
+Dots1Inch_width=96
 
 # definition of global named tuples in use
 Profile = namedtuple('Profile', 'usb_device, device_id, model_name, packet_size, cmd_ep_out, data_ep_in, '
@@ -220,9 +222,13 @@ if __name__ == '__main__':
         try:
             while True:
                 acquired = request_spectrum(sp.usb_device, sp.packet_size, sp.spectra_ep_in, sp.cmd_ep_out)
+                samplespec = (np.linspace(1,len(acquired),num=len(acquired),dtype="int"))
+                np.savetxt(time.strftime("%Y%m%d_%H%M%S")+"_FLAME_S"+".csv", np.vstack((samplespec,acquired)).T, delimiter=', ')
+                print(f"(acquired) : {acquired}")
                 plt.title(sp.model_name)
                 plt.plot(acquired)
-                plt.pause(0.5)
+                plt.pause(5)
+                plt.savefig(time.strftime("%Y%m%d_%H%M%S")+"_FLAME_S"+".png",format="png",dpi=Dots1Inch_height)
                 plt.cla()
         except KeyboardInterrupt:
             # Exit on CTRL-C
