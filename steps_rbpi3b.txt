@@ -1,0 +1,7 @@
+cd
+source ./Py382/bin/activate
+python --version
+cd Documents/GitProjPi3/
+git clone https://github.com/rrdpereira/agrtch_spectrometer.git
+sublime-text.subl
+python ~/Documents/GitProjPi3/agrtch_spectrometer/simple_spectrometer.py
