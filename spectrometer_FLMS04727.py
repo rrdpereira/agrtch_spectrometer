@@ -218,12 +218,12 @@ if __name__ == '__main__':
                 while True:
                     acquired = request_spectrum(sp.usb_device, sp.packet_size, sp.spectra_ep_in, sp.cmd_ep_out)
                     samplespec = (np.linspace(1,len(acquired),num=len(acquired),dtype="int"))
-                    np.savetxt(time.strftime("%Y%m%d_%H%M%S")+"_FLAME_S"+".csv", np.vstack((samplespec,acquired)).T, delimiter=', ')
+                    np.savetxt(time.strftime("%Y%m%d_%H%M%S")+"_FLMS04727"+".csv", np.vstack((samplespec,acquired)).T, delimiter=', ')
                     print(f"(acquired) : {acquired}")
                     plt.title("FLMS04727_"+time.strftime("%Y%m%d_%H%M%S"))
                     plt.plot(acquired)
                     plt.pause(5)
-                    plt.savefig(time.strftime("%Y%m%d_%H%M%S")+"_FLAME_S"+".png",format="png",dpi=Dots1Inch_height)
+                    plt.savefig(time.strftime("%Y%m%d_%H%M%S")+"_FLMS04727"+".png",format="png",dpi=Dots1Inch_height)
                     plt.cla()
             except KeyboardInterrupt:
                 # Exit on CTRL-C
