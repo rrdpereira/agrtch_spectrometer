@@ -197,10 +197,10 @@ if __name__ == '__main__':
     sp = find_spectrometer()
     devices = str( list_devices())
     print(f"(devices) :: {devices} ::")
-    substring = "4767"
+    substring = "4727"
 
     if search(substring, devices):
-        print ("FLMS04767")
+        print ("FLMS04727")
         if sp.usb_device is None:
             print('No Ocean Optics Devices Found')
         elif sp.device_id is None:
@@ -220,7 +220,7 @@ if __name__ == '__main__':
                     samplespec = (np.linspace(1,len(acquired),num=len(acquired),dtype="int"))
                     np.savetxt(time.strftime("%Y%m%d_%H%M%S")+"_FLAME_S"+".csv", np.vstack((samplespec,acquired)).T, delimiter=', ')
                     print(f"(acquired) : {acquired}")
-                    plt.title("FLMS04868_"+time.strftime("%Y%m%d_%H%M%S"))
+                    plt.title("FLMS04727_"+time.strftime("%Y%m%d_%H%M%S"))
                     plt.plot(acquired)
                     plt.pause(5)
                     plt.savefig(time.strftime("%Y%m%d_%H%M%S")+"_FLAME_S"+".png",format="png",dpi=Dots1Inch_height)
@@ -232,4 +232,4 @@ if __name__ == '__main__':
             print("exiting and cleaning up USB comms ...")
             drop_spectrometer(sp.usb_device)
     else:
-        print ("NOT FLMS04767")    
+        print ("NOT FLMS04727")    
