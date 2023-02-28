@@ -14,7 +14,7 @@ Dots1Inch_height=96
 Dots1Inch_width=96
 
 if __name__ == '__main__':
-    SerialFLMS='FLMS04227'
+    SerialFLMS='FLMS04727'
     specs=Spectrometer.from_serial_number(SerialFLMS)
     print(f"(Spectrometer) :: {specs} ::")
 
