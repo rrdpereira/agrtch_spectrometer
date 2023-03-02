@@ -34,7 +34,7 @@ if __name__ == '__main__':
             np.savetxt(time.strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".csv", np.vstack((wave,ints)).T, delimiter=', ')
             plt.title(SerialFLMS+"_"+time.strftime("%Y%m%d_%H%M%S"))
             plt.plot(wave,ints)
-            plt.pause(5) # Sample time in seconds (s)
+            plt.pause(2) # Sample time in seconds (s)
             plt.savefig(time.strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".png",format="png",dpi=Dots1Inch_height)
             plt.cla()
     except KeyboardInterrupt:
