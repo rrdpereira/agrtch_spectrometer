@@ -31,13 +31,11 @@ if __name__ == '__main__':
     try:
         while True:
             wave,ints=specs.spectrum()
-            np.savetxt(time.strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".csv", np.vstack((wave,ints)).T, delimiter=', ')
-            plt.title(SerialFLMS+"_"+time.strftime("%Y%m%d_%H%M%S"))
+            np.savetxt(datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".csv", np.vstack((wave,ints)).T, delimiter=', ')
+            plt.title(SerialFLMS+"_"+datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S"))
             plt.plot(wave,ints)
-            # 1 second to save PNG file
-            plt.savefig(time.strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".png",format="png",dpi=Dots1Inch_height)
+            plt.savefig(datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".png",format="png",dpi=Dots1Inch_height)
             plt.cla()
-            time.sleep(1) # Sleep for 1 second            
     except KeyboardInterrupt:
         # Exit on CTRL-C
         pass            

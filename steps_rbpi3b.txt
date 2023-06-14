@@ -5,3 +5,89 @@ cd Documents/GitProjPi3/
 git clone https://github.com/rrdpereira/agrtch_spectrometer.git
 sublime-text.subl
 python ~/Documents/GitProjPi3/agrtch_spectrometer/simple_spectrometer.py
+
+IP Manjaro Raspberry Pi 3
+ssh geotec@192.168.189.20
+ssh geotec@192.168.231.20
+ssh geotec@192.168.34.20
+ssh geotec@192.168.159.20
+ssh geotec@192.168.164.20
+
+cd
+
+source ./Py382/bin/activate
+
+git clone https://github.com/rrdpereira/agrtch_spectrometer.git
+
+mkdir -p "Folder Name"
+
+cd "Folder Name"
+
+https://www.howtogeek.com/410442/how-to-display-the-date-and-time-in-the-linux-terminal-and-use-it-in-bash-scripts/
+watch -t -n 1 date +%T
+watch -t -n 1 timedatectl
+
+# Down
+python3 ~/agrtch_spectrometer/spectrometer_lib_CSV_PNG_UTC_FLMS04727.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_CSV_UTC_FLMS04727.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_FLMS04727.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_ND_CSV_UTC_FLMS04727.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_ND_UTC_FLMS04727.py
+
+# Up
+python3 ~/agrtch_spectrometer/spectrometer_lib_CSV_PNG_UTC_FLMS04868.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_CSV_UTC_FLMS04868.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_FLMS04868.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_ND_CSV_UTC_FLMS04868.py
+python3 ~/agrtch_spectrometer/spectrometer_lib_ND_UTC_FLMS04868.py
+
+IPAD 150619
+kahos12_2012@hotmail.com
+1708
+4gr13nt3ch
+
+DJI
+posadasdan@gmail.com
+2519aei$
+
+IP Micasense Wifi
+192.168.10.254
+
+IP Micasense Ethernet
+192.168.1.83
+
+Host PC
+192.168.1.40
+
+blue 0.57
+green 0.57
+red 0.56
+nir 0.50
+re 0.55
+
+https://www.techwalla.com/articles/how-to-mount-an-sd-card-in-linux
+#Copy to SD card
+https://opensource.com/article/21/8/copy-files-linux-terminal
+sudo fdisk -l
+
+sudo mkdir /mnt/SD
+
+sudo mount -t vfat /dev/sda1 /mnt/SD
+
+# if error
+systemctl daemon-reload
+
+sudo mount -t vfat /dev/sda1 /mnt/SD
+
+cd /mnt/SD
+
+sudo cp -r /home/geotec/hhtt /mnt/SD
+sudo cp -r /home/geotec/A_Data /mnt/SD
+sudo cp -r /home/geotec/Data0320 /mnt/SD
+sudo cp -r /home/geotec/Data0321 /mnt/SD
+sudo cp -r /home/geotec/Data1303 /mnt/SD
+sudo cp -r /home/geotec/Templates /mnt/SD
+sudo cp -r /home/geotec/Test00 /mnt/SD
+sudo cp -r /home/geotec/TestCamb /mnt/SD
+
+sudo umount -l /mnt/SD
