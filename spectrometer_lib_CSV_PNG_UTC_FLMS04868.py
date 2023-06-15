@@ -6,9 +6,9 @@ import numpy as np
 import sys, time, os, datetime
 from platform import python_version
 
-print(f"(Sys version) :|: {sys.version} :|:")
+# print(f"(Sys version) :|: {sys.version} :|:")
 os.system("which python")
-print(f"(Python version) :#: {python_version()} :#:")
+# print(f"(Python version) :#: {python_version()} :#:")
 
 Dots1Inch_height=96
 Dots1Inch_width=96
