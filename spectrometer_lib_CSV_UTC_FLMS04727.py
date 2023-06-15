@@ -12,15 +12,15 @@ print(f"(Python version) :#: {python_version()} :#:")
 if __name__ == '__main__':
     SerialFLMS='FLMS04727'
     specs=Spectrometer.from_serial_number(SerialFLMS)
-    print(f"(Spectrometer) :: {specs} ::")
+    # print(f"(Spectrometer) :: {specs} ::")
 
     specs.integration_time_micros(5000) # Integration time in microseconds (us)
 
     wavelen=specs.wavelengths()
-    print(f"(Wavelengths) :: {wavelen} ::")
+    # print(f"(Wavelengths) :: {wavelen} ::")
 
     intens=specs.intensities()
-    print(f"(Intensities) :: {intens} ::")
+    # print(f"(Intensities) :: {intens} ::")
 
     try:
         while True:
