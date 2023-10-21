@@ -1,10 +1,10 @@
 ###############################################################################################################
-# spectrometer_lib_CSV_PNG_UTC_FLMS04868.py
+# spectrometer_lib_ND_UTC_M_FLMS04868.py
 
 # Created by: Robson Rogério Dutra Pereira on 01.Sep.2023
 # Last Modified: rrdpereira
 
-# Description: USB spectrometer CSV datalogger with delay of serial number "FLMS0xxxx".
+# Description: USB spectrometer datalogger of serial number "FLMS0xxxx".
 
 # E-mail: robsondutra.pereira@outlook.com
 ###############################################################################################################
@@ -22,35 +22,35 @@ print(f"(Sys version) :|: {sys.version} :|:")
 os.system("which python")
 print(f"(Python version) :#: {python_version()} :#:")
 ###############################################################################################################
-Dots1Inch_height=96
-Dots1Inch_width=96
+Dots1Inch_height = 96
+Dots1Inch_width = 96
+###############################################################################################################
+def main():
+    SerialFLMS = 'FLMS04868'
 
-if __name__ == '__main__':
-    SerialFLMS='FLMS04868'
-    specs=Spectrometer.from_serial_number(SerialFLMS)
-    # print(f"(Spectrometer) :: {specs} ::")
+    # # Chechk part
+    # print("SerialFLMS: {0}".format(SerialFLMS))
 
-    specs.integration_time_micros(5000) # Integration time in microseconds (us)
+    # for i in range(100):
+    #     fout = i + 10
+    #     print("fout868: {0}".format(fout))
 
-    wavelen=specs.wavelengths()
-    # print(f"(Wavelengths) :: {wavelen} ::")
-
-    intens=specs.intensities()
-    # print(f"(Intensities) :: {intens} ::")
-
-    # plot the acquired spectrum
+    specs = Spectrometer.from_serial_number(SerialFLMS)
+    specs.integration_time_micros(5000)  # Integration time in microseconds (us)
     plt.ion()
     try:
         while True:
-            wave,ints=specs.spectrum()
-            np.savetxt(datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".csv", np.vstack((wave,ints)).T, delimiter=', ')
-            plt.title(SerialFLMS+"_"+datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S"))
-            plt.plot(wave,ints)
-            # 1 second to save PNG file
-            plt.savefig(datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".png",format="png",dpi=Dots1Inch_height)
+            wave, ints = specs.spectrum()
+            filename = datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S") + "_" + SerialFLMS
+            np.savetxt(filename + ".csv", np.vstack((wave, ints)).T, delimiter=', ')
+            plt.title(SerialFLMS + "_" + datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S"))
+            plt.plot(wave, ints)
+            plt.savefig(filename + ".png", format="png", dpi=Dots1Inch_height)
             plt.cla()
-            time.sleep(1) # Sleep for 1 second
     except KeyboardInterrupt:
         # Exit on CTRL-C
-        pass            
+        pass
+###############################################################################################################
+if __name__ == '__main__':
+    main()
 ###############################################################################################################    

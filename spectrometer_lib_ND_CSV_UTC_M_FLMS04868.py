@@ -1,5 +1,5 @@
 ###############################################################################################################
-# spectrometer_lib_ND_CSV_UTC_FLMS04868.py
+# spectrometer_lib_ND_CSV_UTC_M_FLMS04868.py
 
 # Created by: Robson Rogério Dutra Pereira on 01.Sep.2023
 # Last Modified: rrdpereira
@@ -22,24 +22,30 @@ print(f"(Sys version) :|: {sys.version} :|:")
 os.system("which python")
 print(f"(Python version) :#: {python_version()} :#:")
 ###############################################################################################################
-if __name__ == '__main__':
-    SerialFLMS='FLMS04868'
-    specs=Spectrometer.from_serial_number(SerialFLMS)
-    # print(f"(Spectrometer) :: {specs} ::")
+Dots1Inch_height = 96
+Dots1Inch_width = 96
+###############################################################################################################
+def main():
+    SerialFLMS = 'FLMS04868'
 
-    specs.integration_time_micros(5000) # Integration time in microseconds (us)
+    # # Chechk part
+    # print("SerialFLMS: {0}".format(SerialFLMS))
 
-    wavelen=specs.wavelengths()
-    # print(f"(Wavelengths) :: {wavelen} ::")
+    # for i in range(100):
+    #     fout = i + 10
+    #     print("fout868: {0}".format(fout))
 
-    intens=specs.intensities()
-    # print(f"(Intensities) :: {intens} ::")
-
+    specs = Spectrometer.from_serial_number(SerialFLMS)
+    specs.integration_time_micros(5000)  # Integration time in microseconds (us)
     try:
         while True:
-            wave,ints=specs.spectrum()
-            np.savetxt(datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")+"_"+SerialFLMS+".csv", np.vstack((wave,ints)).T, delimiter=', ')
+            wave, ints = specs.spectrum()
+            filename = datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S") + "_" + SerialFLMS
+            np.savetxt(filename + ".csv", np.vstack((wave, ints)).T, delimiter=', ')
     except KeyboardInterrupt:
         # Exit on CTRL-C
-        pass            
-###############################################################################################################    
+        pass
+###############################################################################################################
+if __name__ == '__main__':
+    main()
+###############################################################################################################
