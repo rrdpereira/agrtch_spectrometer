@@ -46,7 +46,7 @@ def main():
             # Filename 02
             # Save the data to a CSV file with comments for x and y labels
             with open(filename + ".csv", "w") as file:
-                file.write("# Wavelength[nm], Intensity[16bits_65535_0]\n")  # Manually insert your x and y labels
+                file.write("Wavelength[nm], Intensity[16bits_65535_0]\n")  # Manually insert your x and y labels
                 np.savetxt(file, np.vstack((wave, ints)).T, delimiter=', ')
     except KeyboardInterrupt:
         # Exit on CTRL-C
