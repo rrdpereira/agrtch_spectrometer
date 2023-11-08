@@ -1,0 +1,113 @@
+I have two USB devices that's provide an 2D array data. The first USB device have the following python code:
+
+###############################################################################################################
+import sys, time, os, datetime
+current_file_name = os.path.splitext(os.path.basename(__file__))[0]
+print("current_file_name: {0}".format(current_file_name))
+###############################################################################################################
+from seabreeze.spectrometers import list_devices, Spectrometer
+from re import search
+import matplotlib.pyplot as plt
+import numpy as np
+###############################################################################################################
+from platform import python_version
+print(f"(Sys version) :|: {sys.version} :|:")
+os.system("which python")
+print(f"(Python version) :#: {python_version()} :#:")
+###############################################################################################################
+Dots1Inch_height = 96
+Dots1Inch_width = 96
+###############################################################################################################
+def main():
+    SerialFLMS = 'FLMS04727'
+
+    # # Chechk part
+    # print("SerialFLMS: {0}".format(SerialFLMS))
+
+    # for i in range(100):
+    #     fout = i + 10
+    #     print("fout727: {0}".format(fout))
+
+    specs = Spectrometer.from_serial_number(SerialFLMS)
+    specs.integration_time_micros(5000)  # Integration time in microseconds (us)
+    try:
+        while True:
+            wave, ints = specs.spectrum()
+            filename = datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S") + "_" + SerialFLMS
+            np.savetxt(filename + ".csv", np.vstack((wave, ints)).T, delimiter=', ')
+    except KeyboardInterrupt:
+        # Exit on CTRL-C
+        pass
+###############################################################################################################
+if __name__ == '__main__':
+    main()
+###############################################################################################################    
+
+The second device have the following python code:
+
+###############################################################################################################
+import sys, time, os, datetime
+current_file_name = os.path.splitext(os.path.basename(__file__))[0]
+print("current_file_name: {0}".format(current_file_name))
+###############################################################################################################
+from seabreeze.spectrometers import list_devices, Spectrometer
+from re import search
+import matplotlib.pyplot as plt
+import numpy as np
+###############################################################################################################
+from platform import python_version
+print(f"(Sys version) :|: {sys.version} :|:")
+os.system("which python")
+print(f"(Python version) :#: {python_version()} :#:")
+###############################################################################################################
+Dots1Inch_height = 96
+Dots1Inch_width = 96
+###############################################################################################################
+def main():
+    SerialFLMS = 'FLMS04868'
+
+    # # Chechk part
+    # print("SerialFLMS: {0}".format(SerialFLMS))
+
+    # for i in range(100):
+    #     fout = i + 10
+    #     print("fout868: {0}".format(fout))
+
+    specs = Spectrometer.from_serial_number(SerialFLMS)
+    specs.integration_time_micros(5000)  # Integration time in microseconds (us)
+    try:
+        while True:
+            wave, ints = specs.spectrum()
+            filename = datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S") + "_" + SerialFLMS
+            np.savetxt(filename + ".csv", np.vstack((wave, ints)).T, delimiter=', ')
+    except KeyboardInterrupt:
+        # Exit on CTRL-C
+        pass
+###############################################################################################################
+if __name__ == '__main__':
+    main()
+###############################################################################################################
+
+And main python file was created to call the two USB devices python code, as we can see in:
+
+###############################################################################################################
+import spectrometer_lib_ND_CSV_UTC_M_FLMS04727
+import spectrometer_lib_ND_CSV_UTC_M_FLMS04868
+import gc, time
+from datetime import datetime
+import threading
+###############################################################################################################
+def run_main_function(module):
+    module.main()
+###############################################################################################################
+thread1 = threading.Thread(target=run_main_function, args=(spectrometer_lib_ND_CSV_UTC_M_FLMS04727,))
+thread2 = threading.Thread(target=run_main_function, args=(spectrometer_lib_ND_CSV_UTC_M_FLMS04868,))
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+###############################################################################################################
+
+The simultaneos thread of the two USB devices are not working, please, give details of the python code to fix this issue?

@@ -41,7 +41,13 @@ def main():
         while True:
             wave, ints = specs.spectrum()
             filename = datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y%m%d_%H%M%S") + "_" + SerialFLMS
-            np.savetxt(filename + ".csv", np.vstack((wave, ints)).T, delimiter=', ')
+            # # Filename 01
+            # np.savetxt(filename + ".csv", np.vstack((wave, ints)).T, delimiter=', ')
+            # Filename 02
+            # Save the data to a CSV file with comments for x and y labels
+            with open(filename + ".csv", "w") as file:
+                file.write("# Wavelength[nm], Intensity[16bits_65535_0]\n")  # Manually insert your x and y labels
+                np.savetxt(file, np.vstack((wave, ints)).T, delimiter=', ')
     except KeyboardInterrupt:
         # Exit on CTRL-C
         pass
