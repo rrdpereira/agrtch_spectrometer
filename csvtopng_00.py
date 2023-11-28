@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Directory containing your CSV files
-csv_directory = "r:/Cambuhy/BS0/00"
+csv_directory = "r:/Cambuhy/AT00/"
 
 for filename in os.listdir(csv_directory):
     if filename.endswith('.csv'):
